@@ -1,11 +1,17 @@
 server:
-  port: 9000
+  port: 9100
 
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/user_registration
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: jdbc:postgresql://localhost:5432/authDB
+    username: postgres
+    password: 12345
+

@@ -2,6 +2,7 @@ package com.dailycodebuffer.oauthserver.service;
 
 import com.dailycodebuffer.oauthserver.entity.User;
 import com.dailycodebuffer.oauthserver.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +21,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@Slf4j
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
@@ -36,6 +38,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         if(user == null) {
             throw  new UsernameNotFoundException("No User Found");
         }
+        log.info("User {}",user);
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
                 user.getPassword(),

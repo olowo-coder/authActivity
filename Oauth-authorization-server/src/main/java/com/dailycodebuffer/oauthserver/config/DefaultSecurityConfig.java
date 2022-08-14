@@ -18,9 +18,14 @@ public class DefaultSecurityConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests(authorizeRequests ->
-                        authorizeRequests.anyRequest().authenticated()
-                )
+                        authorizeRequests.antMatchers("/api/register").permitAll()
+                        .anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults());
+
+        http.cors()
+            .and()
+            .csrf()
+            .disable();
         return http.build();
     }
 
